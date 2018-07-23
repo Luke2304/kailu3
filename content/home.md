@@ -12,7 +12,7 @@ draft = false
 		
 My name is Kai and I’m currently a college student interested in Mathematics and   Statistics. In my free time, I love to hike, listen to music by either John Williams or Joe Hisaishi, and play League of Legends. 
 
-I plan on using this blog as a means to document my work and share my thoughts. This blog is made using the R hugo package.
+I plan on using this blog as a means to document my work and share my thoughts. This blog is made using the R blogdown package.
 
 			<img class="wookie-logo" src="/img/elephant.jpg" width="69%">
 			
