@@ -14,7 +14,7 @@ My name is Kai and I’m currently a college student interested in Mathematics a
 
 I plan on using this blog as a means to document my work and share my thoughts.
 
-			<img class="wookie-logo" src="/img/elephant.jpg" width="75%">
+			<img class="wookie-logo" src="/img/elephant.jpg" width="69%">
 			
 		</div>
 		If you would like to contact me, feel free to email me at kailu3@sas.upenn.edu.
