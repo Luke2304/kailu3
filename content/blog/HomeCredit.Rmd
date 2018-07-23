@@ -1,0 +1,105 @@
+---
+title: "Home Credit Default xgbTree 0.741 (Update: 0.763)"
+author: "Kai Lu"
+date: 2018-06-17T21:13:14-05:00
+categories: ["R"]
+tags: ["R Markdown", "R", "Kaggle"]
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+library(dplyr)
+library(purrr)
+library(caret)
+library(readr)
+```
+In this post, we will walk through using R for the Home Credit Default Risk Kaggle Competition. This is my first Kaggle competition and I have learned lots in the process so far. 
+
+## The Problem
+
+The [**Home Credit Default Risk**](https://www.kaggle.com/c/home-credit-default-risk) competition is a supervised classification machine learning task. The objective is to use historical financial and socioeconomic data to predict whether or not an applicant will be able to repay a loan. This is a standard supervised classification task and perfect for those new to predictive modelling.
+
+## Loading the Data
+
+We will be only be using the *application_train* and *application_test* for now. Improvements to the model can be made by combining all datasets. The training and testing .csv files have been saved as .rda to minimize size. 
+
+```{r}
+load(file = "testData.rda")
+load(file = "trainingData.rda")
+```
+
+## Preprocessing
+
+We will be using the xgbTree model from the *caret* package. To use this model, we need to jump through a few hoops.
+
+```{r include=FALSE}
+y <- factor(ifelse(trainingData$TARGET == 1, "Y", "N"))
+trainingData$TARGET <- NULL
+```
+
+#### Change all columns into numeric
+```{r}
+df.temp <- rbind(trainingData, testData)
+df.temp <- df.temp %>% mutate_if(is.factor, as.numeric)
+```
+
+#### Imputation
+There are missing values in this dataset, which we will deal with by filling with the median of the column. Although using median imputation isn't the best imputation method (compared to imputation methods like *MICE* and *knn.impute* ), it tends to be the least computationly expensive.
+```{r cache=TRUE}
+df.temp <- map_df(df.temp, function(x) {
+  x[is.na(x)] <- median(x, na.rm = TRUE); x })
+```
+
+```{r include=FALSE}
+# convert tibble to df
+df.temp <- df.temp %>% as.data.frame()
+```
+
+Now we split df.temp back into training and testing datasets.
+```{r}
+n <- nrow(trainingData)
+trainingData <- df.temp[1:n, ]
+testData <- df.temp[(n + 1):nrow(df.temp), ]
+```
+
+#### Removing Low Variance Columns
+```{r cache=TRUE}
+nz <- nearZeroVar(trainingData, freqCut = 2000, uniqueCut = 10)
+trainingData <- trainingData[,-nz]
+```
+
+#### Removing High Correlation Columns
+```{r cache=TRUE, echo=TRUE, results ='hide'}
+df.correlated <- findCorrelation(cor(trainingData), cutoff = 0.65, verbose = TRUE, exact = TRUE)
+trainingData <- trainingData[, -df.correlated]
+```
+
+We have now only 70 out of the original 122 columns.
+```{r}
+ncol(trainingData)
+```
+
+
+## Training the Model
+
+Now that the preprocessing is complete, we can train our model using the *caret* package.
+
+```{r include=FALSE}
+trControl <- trainControl(method = "cv", n = 5, classProbs = TRUE, summaryFunction = twoClassSummary,
+                          savePredictions = 'final', verboseIter = TRUE)
+grid <- expand.grid(nrounds = c(150), max_depth = c(8), eta = 0.05, 
+                    gamma = 0, colsample_bytree = 0.8, min_child_weight = 0, subsample = 0.8)
+```
+
+```{r echo=TRUE, cache=TRUE, results ='hide'}
+xgbModel <- train(trainingData[, -1], y, method = "xgbTree", metric = "ROC", tuneGrid = grid, trControl = trControl,  preProcess = NULL)
+
+
+```
+
+## Results
+Here is a summary of our model. The final ROC value after submission will be expected to be a little lower.
+```{r}
+xgbModel
+```
+
+

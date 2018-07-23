@@ -1,0 +1,182 @@
+---
+title: "Doublelift's Performance in Spring 2018 (NALCS)"
+author: "Kai Lu"
+date: '2018-06-17'
+categories: ["R"]
+tags: ["R Markdown", "R", "League of Legends"]
+---
+
+```{r setup, include=FALSE}
+library(readxl)
+library(dplyr)
+library(ggplot2)
+library(tibble)
+```
+
+```{r echo=FALSE, results='hide'}
+# Read in the data using the readxl library. Data is credited to Oracles Elixir
+load(file = "springData.rda")
+
+# Function that slices data according to a NALCS player's position and player handle
+sliceByPlayer <- function(POSITION, PLAYER_NAME) {
+playerData <- springData %>% 
+  filter(league == "NALCS") %>% 
+  filter(position == POSITION) %>% 
+  filter(player == PLAYER_NAME)
+return (playerData)
+}
+
+doubleLift <- sliceByPlayer("ADC", "Doublelift")
+doubleLiftdmg <- doubleLift$dmgtochamps
+doubleLift$week <- factor(doubleLift$week)
+doubleLift$champion <- factor(doubleLift$champion)
+
+# Calculate mean by champion
+dmgPerChamp <- doubleLift %>% 
+  select(champion, dmgtochamps, dmgtochampsperminute) %>%
+  group_by(champion) %>%
+  summarise(mean = mean(dmgtochamps),
+            DmgPerMinute = mean(dmgtochampsperminute)) %>% 
+  arrange(-mean) %>% 
+  ungroup() %>% 
+  data.frame()
+
+dmgPerChamp$champion <- factor(dmgPerChamp$champion, levels = dmgPerChamp$champion[order(-dmgPerChamp$mean)])
+```
+
+## Description
+
+Hello! This is a simple analysis of Doublelift's performance during the 2018 NALCS Spring Season. Doublelift is the ingame name of a League of Legends player who plays ADC position for Team Liquid. The dataset used this analysis is taken from and credited to https://oracleselixir.com/match-data/.
+
+For those we do not play League of Legends, here is a quick description:
+
+*Developed by Riot Games, League of legends has become one of the most popular multiplayer video games in the world. In League of Legends, players compete in matches, lasting anywhere from 20 to 60 minutes on average. In each game mode teams work together to achieve a victory condition, typically destroying the core building (called the Nexus) in the enemy team's base after bypassing a line of defensive structures called turrets, or towers.*
+
+*Summoner's Rift is the most popular game mode in League of Legends. The objective of the blue team, for example, is to destroy the red team’s nexus/base. To do this, players must control characters called champions and work together with other players to defeat the enemy players and ultimately their base. It is a fast-paced game that involves communication, teamwork, and coordination between players on the same team.*
+
+Code for slicing the data:
+```{r echo=T, results ='hide'}
+load(file = "springData.rda")
+```
+```{r echo=TRUE}
+# Function that slices by player position and handle
+sliceByPlayer <- function(POSITION, PLAYER_NAME) {
+playerData <- springData %>% 
+  filter(league == "NALCS") %>% 
+  filter(position == POSITION) %>% 
+  filter(player == PLAYER_NAME)
+return (playerData)
+}
+```
+
+```{r echo=TRUE}
+doubleLift <- sliceByPlayer("ADC", "Doublelift")
+```
+
+## Data Preview
+Here is a preview of the dataset we are analyzing.
+```{r}
+head(doubleLift)
+```
+
+## Slicing
+
+Here we extract the data we want.
+```{r echo=TRUE}
+dmgPerChamp <- doubleLift %>% 
+  select(champion, dmgtochamps, dmgtochampsperminute) %>%
+  group_by(champion) %>%
+  summarise(mean = mean(dmgtochamps),
+            DmgPerMinute = mean(dmgtochampsperminute)) %>% 
+  arrange(-mean) %>% 
+  ungroup() %>% 
+  data.frame()
+dmgPerChamp$champion <- factor(dmgPerChamp$champion, levels = dmgPerChamp$champion[order(-dmgPerChamp$mean)])
+dmgPerChamp
+```
+
+## Damage Per Champion Graph
+
+```{r}
+dmgByChampion <- ggplot(data = dmgPerChamp, aes(dmgPerChamp$champion, dmgPerChamp$mean, fill = dmgPerChamp$DmgPerMinute))
+
+dmgByChampion + geom_col() + labs(x = "Champion") + labs(y = "Average Damage dealt to Champions") + labs(fill = "Damage / Minute") + ggtitle("Graph of Doublelift's Average Damage Dealt by Champion") + theme(plot.title = element_text(hjust = 0.5)) +
+  theme(axis.text.x = element_text(colour="black",size= 7,angle= 0,hjust=.5,vjust=.5,face="plain"))
+        
+```
+
+*Doublelift* has performed the best on Jhin during the 2018 Spring Season in terms of both Total Damage Dealt and Damage Dealt per Minute. It comes to no surprise that Jhin was picked for Doublelift quite frequently during MSI. 
+
+## Comparison Across Other ADCs  
+
+```{r echo=FALSE, results='hide'}
+# Function that slices by POSITION
+sliceByPosition <- function(POSITION) {
+positionData <- springData %>% 
+  filter(league == "NALCS") %>% 
+  filter(position == POSITION) 
+return (positionData)
+}
+```
+
+```{r echo = FALSE, results = 'hide'}
+# adc slice with all columns
+adc <- sliceByPosition("ADC") %>% data.frame()
+
+# adc slice with selected columns averaged across players
+adcSlice <- adc %>% 
+  select(player, gamelength, k, d, a, dmgtochamps, dmgtochampsperminute, dmgshare, earnedgoldshare, cspm, goldat10, totalgold, minionkills) %>% 
+  group_by(player) %>%
+  summarise(avg_gamelength = mean(gamelength),
+            avg_k = mean(k),
+            avg_d = mean(d),
+            avg_a = mean(a),
+            avg_dmgtochamps = mean(dmgtochamps),
+            avg_dmgtochampsperminute = mean(dmgtochampsperminute),
+            avg_dmgshare = mean(dmgshare),
+            avg_earnedgoldshare = mean(earnedgoldshare),
+            avg_cspm = mean(cspm),
+            avg_goldat10 = mean(goldat10),
+            avg_totalgold = mean(totalgold),
+            avg_minionkills = mean(minionkills)) %>% 
+  
+  ungroup() %>% 
+  data.frame()
+
+```
+
+```{r echo=FALSE}
+dmgtochampsSlice <- adcSlice %>% 
+  select(player, avg_dmgtochamps, avg_dmgtochampsperminute) %>% 
+  arrange(avg_dmgtochamps)
+
+# Rename WILDTURTLE to Wildturtle
+dmgtochampsSlice$player <- as.character(dmgtochampsSlice$player) # Change to character first
+dmgtochampsSlice$player[7] <- "Wildturtle"
+dmgtochampsSlice$player <- as.factor(dmgtochampsSlice$player)
+
+
+dmgtochampsSlice$player <- factor(dmgtochampsSlice$player, levels = dmgtochampsSlice$player[order(-dmgtochampsSlice$avg_dmgtochamps)])
+
+dmgByPlayer <- ggplot(data = dmgtochampsSlice, aes(dmgtochampsSlice$player, dmgtochampsSlice$avg_dmgtochamps))
+
+dmgByPlayer + geom_col(fill = "#FF6666") + labs(x = "Player") + labs(y = "Average Damage dealt to Champions") + ggtitle("Average Total Damage Dealt to Champions") + theme(plot.title = element_text(hjust = 0.5)) + theme(axis.text.x = element_text(colour = "black",size = 7, angle = 0,hjust =.5,vjust = .5,face ="plain"))
+```
+*Doublelift* ranks 9th out of 10 ADCs for Average Total Damage dealt to Champions.  
+
+
+```{r echo=FALSE}
+dmgtochampsSlice$player <- factor(dmgtochampsSlice$player, levels = dmgtochampsSlice$player[order(-dmgtochampsSlice$avg_dmgtochampsperminute)])
+
+dmgByPlayerPerMin <- ggplot(data = dmgtochampsSlice, aes(dmgtochampsSlice$player, dmgtochampsSlice$avg_dmgtochampsperminute))
+
+dmgByPlayerPerMin + geom_col(fill = "#FF6666") + labs(x = "Player") + labs(y = "Average Damage dealt to Champions per Minute") + ggtitle("Average Damage per Minute Dealt to Champions")  +  theme(plot.title = element_text(hjust = 0.5)) + theme(axis.text.x = element_text(colour = "black",size = 7, angle = 0,hjust =.5,vjust = .5,face ="plain"))
+
+
+```
+Despite being 9th in average Total Damage, *Doublelift* ranks 4th for average Damage to Champions per Minute.
+
+
+
+
+

@@ -1,0 +1,83 @@
+---
+title: "Home Credit Default xgbTree 0.741 (Update: 0.763)"
+author: "Kai Lu"
+date: 2018-06-17T21:13:14-05:00
+categories: ["R"]
+tags: ["R Markdown", "R", "Kaggle"]
+---
+
+
+
+<p>In this post, we will walk through using R for the Home Credit Default Risk Kaggle Competition. This is my first Kaggle competition and I have learned lots in the process so far.</p>
+<div id="the-problem" class="section level2">
+<h2>The Problem</h2>
+<p>The <a href="https://www.kaggle.com/c/home-credit-default-risk"><strong>Home Credit Default Risk</strong></a> competition is a supervised classification machine learning task. The objective is to use historical financial and socioeconomic data to predict whether or not an applicant will be able to repay a loan. This is a standard supervised classification task and perfect for those new to predictive modelling.</p>
+</div>
+<div id="loading-the-data" class="section level2">
+<h2>Loading the Data</h2>
+<p>We will be only be using the <em>application_train</em> and <em>application_test</em> for now. Improvements to the model can be made by combining all datasets. The training and testing .csv files have been saved as .rda to minimize size.</p>
+<pre class="r"><code>load(file = &quot;testData.rda&quot;)
+load(file = &quot;trainingData.rda&quot;)</code></pre>
+</div>
+<div id="preprocessing" class="section level2">
+<h2>Preprocessing</h2>
+<p>We will be using the xgbTree model from the <em>caret</em> package. To use this model, we need to jump through a few hoops.</p>
+<div id="change-all-columns-into-numeric" class="section level4">
+<h4>Change all columns into numeric</h4>
+<pre class="r"><code>df.temp &lt;- rbind(trainingData, testData)
+df.temp &lt;- df.temp %&gt;% mutate_if(is.factor, as.numeric)</code></pre>
+</div>
+<div id="imputation" class="section level4">
+<h4>Imputation</h4>
+<p>There are missing values in this dataset, which we will deal with by filling with the median of the column. Although using median imputation isn’t the best imputation method (compared to imputation methods like <em>MICE</em> and <em>knn.impute</em> ), it tends to be the least computationly expensive.</p>
+<pre class="r"><code>df.temp &lt;- map_df(df.temp, function(x) {
+  x[is.na(x)] &lt;- median(x, na.rm = TRUE); x })</code></pre>
+<p>Now we split df.temp back into training and testing datasets.</p>
+<pre class="r"><code>n &lt;- nrow(trainingData)
+trainingData &lt;- df.temp[1:n, ]
+testData &lt;- df.temp[(n + 1):nrow(df.temp), ]</code></pre>
+</div>
+<div id="removing-low-variance-columns" class="section level4">
+<h4>Removing Low Variance Columns</h4>
+<pre class="r"><code>nz &lt;- nearZeroVar(trainingData, freqCut = 2000, uniqueCut = 10)
+trainingData &lt;- trainingData[,-nz]</code></pre>
+</div>
+<div id="removing-high-correlation-columns" class="section level4">
+<h4>Removing High Correlation Columns</h4>
+<pre class="r"><code>df.correlated &lt;- findCorrelation(cor(trainingData), cutoff = 0.65, verbose = TRUE, exact = TRUE)
+trainingData &lt;- trainingData[, -df.correlated]</code></pre>
+<p>We have now only 70 out of the original 122 columns.</p>
+<pre class="r"><code>ncol(trainingData)
+## [1] 70</code></pre>
+</div>
+</div>
+<div id="training-the-model" class="section level2">
+<h2>Training the Model</h2>
+<p>Now that the preprocessing is complete, we can train our model using the <em>caret</em> package.</p>
+<pre class="r"><code>xgbModel &lt;- train(trainingData[, -1], y, method = &quot;xgbTree&quot;, metric = &quot;ROC&quot;, tuneGrid = grid, trControl = trControl,  preProcess = NULL)
+</code></pre>
+</div>
+<div id="results" class="section level2">
+<h2>Results</h2>
+<p>Here is a summary of our model. The final ROC value after submission will be expected to be a little lower.</p>
+<pre class="r"><code>xgbModel
+## eXtreme Gradient Boosting 
+## 
+## 307511 samples
+##     69 predictor
+##      2 classes: &#39;N&#39;, &#39;Y&#39; 
+## 
+## No pre-processing
+## Resampling: Cross-Validated (5 fold) 
+## Summary of sample sizes: 246009, 246009, 246008, 246009, 246009 
+## Resampling results:
+## 
+##   ROC        Sens       Spec      
+##   0.7506336  0.9989423  0.01530715
+## 
+## Tuning parameter &#39;nrounds&#39; was held constant at a value of 150
+##  0.8
+## Tuning parameter &#39;min_child_weight&#39; was held constant at a value of
+##  0
+## Tuning parameter &#39;subsample&#39; was held constant at a value of 0.8</code></pre>
+</div>

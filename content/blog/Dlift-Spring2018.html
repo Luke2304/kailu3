@@ -1,0 +1,104 @@
+---
+title: "Doublelift's Performance in Spring 2018 (NALCS)"
+author: "Kai Lu"
+date: '2018-06-17'
+categories: ["R"]
+tags: ["R Markdown", "R", "League of Legends"]
+---
+
+
+
+<div id="description" class="section level2">
+<h2>Description</h2>
+<p>Hello! This is a simple analysis of Doublelift’s performance during the 2018 NALCS Spring Season. Doublelift is the ingame name of a League of Legends player who plays ADC position for Team Liquid. The dataset used this analysis is taken from and credited to <a href="https://oracleselixir.com/match-data/" class="uri">https://oracleselixir.com/match-data/</a>.</p>
+<p>For those we do not play League of Legends, here is a quick description:</p>
+<p><em>Developed by Riot Games, League of legends has become one of the most popular multiplayer video games in the world. In League of Legends, players compete in matches, lasting anywhere from 20 to 60 minutes on average. In each game mode teams work together to achieve a victory condition, typically destroying the core building (called the Nexus) in the enemy team’s base after bypassing a line of defensive structures called turrets, or towers.</em></p>
+<p><em>Summoner’s Rift is the most popular game mode in League of Legends. The objective of the blue team, for example, is to destroy the red team’s nexus/base. To do this, players must control characters called champions and work together with other players to defeat the enemy players and ultimately their base. It is a fast-paced game that involves communication, teamwork, and coordination between players on the same team.</em></p>
+<p>Code for slicing the data:</p>
+<pre class="r"><code>load(file = &quot;springData.rda&quot;)</code></pre>
+<pre class="r"><code># Function that slices by player position and handle
+sliceByPlayer &lt;- function(POSITION, PLAYER_NAME) {
+playerData &lt;- springData %&gt;% 
+  filter(league == &quot;NALCS&quot;) %&gt;% 
+  filter(position == POSITION) %&gt;% 
+  filter(player == PLAYER_NAME)
+return (playerData)
+}</code></pre>
+<pre class="r"><code>doubleLift &lt;- sliceByPlayer(&quot;ADC&quot;, &quot;Doublelift&quot;)</code></pre>
+</div>
+<div id="data-preview" class="section level2">
+<h2>Data Preview</h2>
+<p>Here is a preview of the dataset we are analyzing.</p>
+<pre class="r"><code>head(doubleLift)</code></pre>
+<pre><code>## # A tibble: 6 x 98
+##   gameid  url       league split   date week   game patchno playerid side 
+##   &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;
+## 1 100244… https://… NALCS  2018… 43121. 1         1    8.01        4 Blue 
+## 2 100244… https://… NALCS  2018… 43122. 1         2    8.01        9 Red  
+## 3 100244… https://… NALCS  2018… 43128. 2         1    8.01        9 Red  
+## 4 100244… https://… NALCS  2018… 43129. 2         2    8.01        4 Blue 
+## 5 100245… https://… NALCS  2018… 43135. 3         1    8.02        9 Red  
+## 6 100245… https://… NALCS  2018… 43136. 3         2    8.02        9 Red  
+## # ... with 88 more variables: position &lt;chr&gt;, player &lt;chr&gt;, team &lt;chr&gt;,
+## #   champion &lt;chr&gt;, ban1 &lt;chr&gt;, ban2 &lt;chr&gt;, ban3 &lt;chr&gt;, ban4 &lt;chr&gt;,
+## #   ban5 &lt;chr&gt;, gamelength &lt;dbl&gt;, result &lt;dbl&gt;, k &lt;dbl&gt;, d &lt;dbl&gt;, a &lt;dbl&gt;,
+## #   teamkills &lt;dbl&gt;, teamdeaths &lt;dbl&gt;, doubles &lt;dbl&gt;, triples &lt;dbl&gt;,
+## #   quadras &lt;dbl&gt;, pentas &lt;dbl&gt;, fb &lt;dbl&gt;, fbassist &lt;dbl&gt;, fbvictim &lt;dbl&gt;,
+## #   fbtime &lt;dbl&gt;, kpm &lt;dbl&gt;, okpm &lt;dbl&gt;, ckpm &lt;dbl&gt;, fd &lt;dbl&gt;,
+## #   fdtime &lt;dbl&gt;, teamdragkills &lt;dbl&gt;, oppdragkills &lt;dbl&gt;,
+## #   elementals &lt;dbl&gt;, oppelementals &lt;dbl&gt;, firedrakes &lt;dbl&gt;,
+## #   waterdrakes &lt;dbl&gt;, earthdrakes &lt;dbl&gt;, airdrakes &lt;dbl&gt;, elders &lt;dbl&gt;,
+## #   oppelders &lt;dbl&gt;, herald &lt;dbl&gt;, heraldtime &lt;dbl&gt;, ft &lt;dbl&gt;,
+## #   fttime &lt;dbl&gt;, firstmidouter &lt;dbl&gt;, firsttothreetowers &lt;dbl&gt;,
+## #   teamtowerkills &lt;dbl&gt;, opptowerkills &lt;dbl&gt;, fbaron &lt;dbl&gt;,
+## #   fbarontime &lt;dbl&gt;, teambaronkills &lt;dbl&gt;, oppbaronkills &lt;dbl&gt;,
+## #   dmgtochamps &lt;dbl&gt;, dmgtochampsperminute &lt;dbl&gt;, dmgshare &lt;dbl&gt;,
+## #   earnedgoldshare &lt;dbl&gt;, wards &lt;dbl&gt;, wpm &lt;dbl&gt;, wardshare &lt;dbl&gt;,
+## #   wardkills &lt;dbl&gt;, wcpm &lt;dbl&gt;, visionwards &lt;dbl&gt;, visionwardbuys &lt;dbl&gt;,
+## #   visiblewardclearrate &lt;dbl&gt;, invisiblewardclearrate &lt;dbl&gt;,
+## #   totalgold &lt;dbl&gt;, earnedgpm &lt;dbl&gt;, goldspent &lt;dbl&gt;, gspd &lt;dbl&gt;,
+## #   minionkills &lt;dbl&gt;, monsterkills &lt;dbl&gt;, monsterkillsownjungle &lt;dbl&gt;,
+## #   monsterkillsenemyjungle &lt;dbl&gt;, cspm &lt;dbl&gt;, goldat10 &lt;dbl&gt;,
+## #   oppgoldat10 &lt;dbl&gt;, gdat10 &lt;dbl&gt;, goldat15 &lt;dbl&gt;, oppgoldat15 &lt;dbl&gt;,
+## #   gdat15 &lt;dbl&gt;, xpat10 &lt;dbl&gt;, oppxpat10 &lt;dbl&gt;, xpdat10 &lt;dbl&gt;,
+## #   csat10 &lt;dbl&gt;, oppcsat10 &lt;dbl&gt;, csdat10 &lt;dbl&gt;, csat15 &lt;dbl&gt;,
+## #   oppcsat15 &lt;dbl&gt;, csdat15 &lt;dbl&gt;</code></pre>
+</div>
+<div id="slicing" class="section level2">
+<h2>Slicing</h2>
+<p>Here we extract the data we want.</p>
+<pre class="r"><code>dmgPerChamp &lt;- doubleLift %&gt;% 
+  select(champion, dmgtochamps, dmgtochampsperminute) %&gt;%
+  group_by(champion) %&gt;%
+  summarise(mean = mean(dmgtochamps),
+            DmgPerMinute = mean(dmgtochampsperminute)) %&gt;% 
+  arrange(-mean) %&gt;% 
+  ungroup() %&gt;% 
+  data.frame()
+dmgPerChamp$champion &lt;- factor(dmgPerChamp$champion, levels = dmgPerChamp$champion[order(-dmgPerChamp$mean)])
+dmgPerChamp</code></pre>
+<pre><code>##   champion     mean DmgPerMinute
+## 1     Jhin 30885.40     866.0483
+## 2  Kog&#39;Maw 27985.00     694.5192
+## 3  Caitlyn 24623.60     704.7594
+## 4     Ashe 23597.00     794.6013
+## 5   Ezreal 20752.50     574.0597
+## 6 Tristana 13507.86     421.1571
+## 7  Kalista 13365.00     363.1793
+## 8    Xayah 13205.00     423.6898
+## 9    Varus 10842.25     343.2878</code></pre>
+</div>
+<div id="damage-per-champion-graph" class="section level2">
+<h2>Damage Per Champion Graph</h2>
+<pre class="r"><code>dmgByChampion &lt;- ggplot(data = dmgPerChamp, aes(dmgPerChamp$champion, dmgPerChamp$mean, fill = dmgPerChamp$DmgPerMinute))
+
+dmgByChampion + geom_col() + labs(x = &quot;Champion&quot;) + labs(y = &quot;Average Damage dealt to Champions&quot;) + labs(fill = &quot;Damage / Minute&quot;) + ggtitle(&quot;Graph of Doublelift&#39;s Average Damage Dealt by Champion&quot;) + theme(plot.title = element_text(hjust = 0.5)) +
+  theme(axis.text.x = element_text(colour=&quot;black&quot;,size= 7,angle= 0,hjust=.5,vjust=.5,face=&quot;plain&quot;))</code></pre>
+<p><img src="/blog/Dlift-Spring2018_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><em>Doublelift</em> has performed the best on Jhin during the 2018 Spring Season in terms of both Total Damage Dealt and Damage Dealt per Minute. It comes to no surprise that Jhin was picked for Doublelift quite frequently during MSI.</p>
+</div>
+<div id="comparison-across-other-adcs" class="section level2">
+<h2>Comparison Across Other ADCs</h2>
+<p><img src="/blog/Dlift-Spring2018_files/figure-html/unnamed-chunk-10-1.png" width="672" /> <em>Doublelift</em> ranks 9th out of 10 ADCs for Average Total Damage dealt to Champions.</p>
+<p><img src="/blog/Dlift-Spring2018_files/figure-html/unnamed-chunk-11-1.png" width="672" /> Despite being 9th in average Total Damage, <em>Doublelift</em> ranks 4th for average Damage to Champions per Minute.</p>
+</div>
