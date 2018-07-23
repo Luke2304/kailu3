@@ -17,7 +17,7 @@ I wanted to use this blog post as refresher for what I got to do this past eight
 
 **May 27th**: Got to do a bit of exploring in the Camps Bay Area.
 
-```{r, echo=FALSE, out.width = "400px"}
+```{r, echo=FALSE, out.width = "800px"}
 knitr::include_graphics("/img/campsbay.jpg")
 ```
 
@@ -27,7 +27,7 @@ knitr::include_graphics("/img/campsbay.jpg")
 
 **May 30th**: I hiked Lion's Head with Raza! (~ 1.5hrs)
 
-```{r, echo=FALSE, out.width = "400px"}
+```{r, echo=FALSE, out.width = "800px"}
 knitr::include_graphics("/img/lionshead.jpg")
 ```
 
@@ -41,7 +41,7 @@ knitr::include_graphics("/img/lionshead.jpg")
 
 There are penguins in Africa!
 
-```{r, echo=FALSE, out.width = "400px"}
+```{r, echo=FALSE, out.width = "800px"}
 knitr::include_graphics("/img/capepoint1.jpg")
 knitr::include_graphics("/img/capepoint2.PNG")
 knitr::include_graphics("/img/capepoint3.jpg")
@@ -72,7 +72,7 @@ mnist.test  <- mnist[-index,]
 
 **June 10th**: Robben Island.
 
-```{r, echo=FALSE, out.width = "400px"}
+```{r, echo=FALSE, out.width = "800px"}
 knitr::include_graphics("/img/robisland.jpg")
 ```
 
@@ -88,7 +88,7 @@ knitr::include_graphics("/img/robisland.jpg")
 
 **June 23rd**: Moved to Mouille Point.
 
-```{r, echo=FALSE, out.width = "400px"}
+```{r, echo=FALSE, out.width = "800px"}
 knitr::include_graphics("/img/mouille.jpg")
 ```
 
@@ -96,13 +96,13 @@ knitr::include_graphics("/img/mouille.jpg")
 
 **June 30th**: Kirstenbosch Botanical Garden
 
-```{r, echo=FALSE, out.width = "400px"}
+```{r, echo=FALSE, out.width = "800px"}
 knitr::include_graphics("/img/garden1.jpg")
 ```
 
 **July 7th**: Table Mountain hike from Skeleton Gorge (~ 4.5hrs).
 
-```{r, echo=FALSE, out.width = "400px"}
+```{r, echo=FALSE, out.width = "800px"}
 knitr::include_graphics("/img/table1.jpg")
 knitr::include_graphics("/img/table2.jpg")
 ```
@@ -111,7 +111,7 @@ knitr::include_graphics("/img/table2.jpg")
 
 **July 12 - 14**: Safari Trip!
 
-```{r, echo=FALSE, out.width = "400px"}
+```{r, echo=FALSE, out.width = "800px"}
 knitr::include_graphics("/img/safari1.jpg")
 knitr::include_graphics("/img/safari2.jpg")
 knitr::include_graphics("/img/safari3.jpg")
@@ -120,31 +120,33 @@ knitr::include_graphics("/img/safari3.jpg")
 
 Cango Caves
 
-```{r, echo=FALSE, out.width = "400px"}
+```{r, echo=FALSE, out.width = "800px"}
 knitr::include_graphics("/img/safari4.jpg")
 ```
 
 Serval
 
-```{r, echo=FALSE, out.width = "400px"}
+```{r, echo=FALSE, out.width = "800px"}
 knitr::include_graphics("/img/safari5.jpg")
 ```
 
 **July 20th**: Last day of work
 
-```{r, echo=FALSE, out.width = "400px"}
+```{r, echo=FALSE, out.width = "800px"}
 knitr::include_graphics("/img/dp.jpg")
 ```
 
 **July 21st**: Last day in Cape Town. Aaron, Yugaant, and I decided to go up Table mountain again.
 
-```{r, echo=FALSE, out.width = "400px"}
+```{r, echo=FALSE, out.width = "800px"}
 knitr::include_graphics("/img/table3.jpg")
 knitr::include_graphics("/img/table4.jpg")
 ```
 
 On the way, we saw these cute fellas chlling on a rock. These guys are called Rock Hyraxs.
 
-```{r, echo=FALSE, out.width = "400px"}
+```{r, echo=FALSE, out.width = "800px"}
 knitr::include_graphics("/img/table5.jpg")
 ```
+
+I'll miss this place.
