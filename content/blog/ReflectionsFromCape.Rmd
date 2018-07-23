@@ -46,10 +46,11 @@ knitr::include_graphics("/img/capepoint1.jpg")
 knitr::include_graphics("/img/capepoint2.PNG")
 knitr::include_graphics("/img/capepoint3.jpg")
 ```
-
+ <br />   
+ <br /> 
 **June 5th**: Decision trees, logistic regression, and my favourite: kNN (K-nearest neighbours)!
 
-**June 6th**: Applied kNN and linear regression to `mtcar` dataset.
+**June 6th**: Applied kNN and linear regression to `mtcars` dataset.
 
 **June 7th**: Learned about cross-validation, bootstrap, and the `caret` library using the `Titanic` dataset. Remember that when there is an imbalance of classes (0.91 / 0/09 for HomeCredit), undersampling the majority to match the minority is a bad idea. Upsampling the minority helps, but there is always tradeoff with Sensitivy and Specificity.
 
@@ -106,7 +107,9 @@ knitr::include_graphics("/img/garden1.jpg")
 knitr::include_graphics("/img/table1.jpg")
 knitr::include_graphics("/img/table2.jpg")
 ```
-
+ 
+ <br /> 
+ <br /> 
 **July 8th - July 20th**: Learned about React and D3.js to create interactive data visualization graphs for OMNI client dashboard.
 
 **July 12 - 14**: Safari Trip!
@@ -117,25 +120,33 @@ knitr::include_graphics("/img/safari2.jpg")
 knitr::include_graphics("/img/safari3.jpg")
 
 ```
-
+ 
+ <br /> 
+ <br /> 
 Cango Caves
 
 ```{r, echo=FALSE, out.width = "800px"}
 knitr::include_graphics("/img/safari4.jpg")
 ```
-
+ 
+ <br /> 
+ <br /> 
 Serval
 
 ```{r, echo=FALSE, out.width = "800px"}
 knitr::include_graphics("/img/safari5.jpg")
 ```
-
+ 
+ <br /> 
+ <br /> 
 **July 20th**: Last day of work
 
 ```{r, echo=FALSE, out.width = "800px"}
 knitr::include_graphics("/img/dp.jpg")
 ```
-
+ 
+ <br /> 
+ <br /> 
 **July 21st**: Last day in Cape Town. Aaron, Yugaant, and I decided to go up Table mountain again.
 
 ```{r, echo=FALSE, out.width = "800px"}
@@ -143,6 +154,8 @@ knitr::include_graphics("/img/table3.jpg")
 knitr::include_graphics("/img/table4.jpg")
 ```
 
+ <br /> 
+ 
 On the way, we saw these cute fellas chlling on a rock. These guys are called Rock Hyraxs.
 
 ```{r, echo=FALSE, out.width = "800px"}
