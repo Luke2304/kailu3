@@ -35,13 +35,13 @@ tags = "tags"
 
 [[menu.main]]
 weight = 1
-name = "Blog"
-url = "/blog"
+name = "Home"
+url = "/home"
 
 [[menu.main]]
 weight = 2
-name = "About"
-url = "/about"
+name = "Blog"
+url = "/blog"
 
 # [[menu.main]]
 # weight = 3
