@@ -1,9 +1,9 @@
 languageCode = "en-us"
-title = "datawookie"
+title = "Kai Lu"
 theme = "wookie"
-baseurl = "https://datawookie.netlify.com/"
+baseurl = "https://kailu3.netlify.com/"
 
-googleAnalytics = "UA-89552291-2"
+# googleAnalytics = ""
 
 paginate = 30
 
@@ -16,10 +16,10 @@ pygmentsUseClasses = true
 
 [params]
 description = ""
-author = "Andrew B. Collier"
+author = "Kai Lu"
 # logoimage = "images/logo.jpg"
 # copyright = "foo"
-twitterAuthor = "@datawookie"
+# twitterAuthor = "@"
 # twitterSite = "@invalid_input"
 
 [permalinks]
@@ -43,7 +43,7 @@ weight = 2
 name = "Blog"
 url = "/blog/"
 
-[[menu.main]]
-weight = 3
-name = "Résumé"
-url = "/resume/"
+# [[menu.main]]
+# weight = 3
+# name = "Résumé"
+# url = "/resume/"

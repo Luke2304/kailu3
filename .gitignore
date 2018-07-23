@@ -3,3 +3,4 @@ themes/hugo-fresh/
 public/
 *.bak
 *sublime*
+.Rproj.user
