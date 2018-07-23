@@ -3,7 +3,7 @@ title = "Kai Lu"
 theme = "wookie"
 baseurl = "https://kailu3.com/"
 
-# googleAnalytics = ""
+googleAnalytics = "UA-112762663-2"
 
 paginate = 30
 
