@@ -35,7 +35,6 @@ tags = "tags"
 
 [[menu.main]]
 weight = 1
-identifier = "home"
 name = "Home"
 url = "/"
 
