@@ -1,0 +1,150 @@
+---
+title: Looking back at Cape Town
+date: 2018-07-21
+
+categories:
+- Reflection
+- Other
+
+tags:
+- Other
+---
+Two months ago, I landed in the beautiful city of Cape Town. I was tired, not from just the 12 hr plane ride but also from a frustrating semester of classes where I felt like I hadn't learned anything particularly useful. Looking back at my brief yet amazing eight weeks here, I can't believe how much I've learned here. The whole experience still feels surreal to me as I sit typing away in a cramped plane ride to London.
+
+I wanted to use this blog post as refresher for what I got to do this past eight-weeks:
+
+**May 26th:** Arrived in Cape Town!
+
+**May 27th**: Got to do a bit of exploring in the Camps Bay Area.
+
+```{r, echo=FALSE, out.width = "400px"}
+knitr::include_graphics("/img/campsbay.jpg")
+```
+
+**May 28th**: Work in the first month was primarily in R. Learned and practiced libaries `tibble`, `magrittr`, `dplyr`, `tidyr`. The ` %>% ` operator is super useful and makes doing data wrangling in R both clean and easily readable.
+
+**May 29th**: Refresher on using Version Control and Git.
+
+**May 30th**: I hiked Lion's Head with Raza! (~ 1.5hrs)
+
+```{r, echo=FALSE, out.width = "400px"}
+knitr::include_graphics("/img/lionshead.jpg")
+```
+
+**May 31th**: Learned about using webscraping libraries `rvest` and `RSelenium`. Introduction to HTTP codes and basic css.
+
+**June 1st**: Introduction to making SQL queries and R data visualization with `ggplot2`.
+
+**June 2nd**: Covered making R packages.
+
+**June 3rd**: Cape Point Tour.
+
+There are penguins in Africa!
+
+```{r, echo=FALSE, out.width = "400px"}
+knitr::include_graphics("/img/capepoint1.jpg")
+knitr::include_graphics("/img/capepoint2.PNG")
+knitr::include_graphics("/img/capepoint3.jpg")
+```
+
+**June 5th**: Decision trees, logistic regression, and my favourite: kNN (K-nearest neighbours)!
+
+**June 6th**: Applied kNN and linear regression to `mtcar` dataset.
+
+**June 7th**: Learned about cross-validation, bootstrap, and the `caret` library using the `Titanic` dataset. Remember that when there is an imbalance of classes (0.91 / 0/09 for HomeCredit), undersampling the majority to match the minority is a bad idea. Upsampling the minority helps, but there is always tradeoff with Sensitivy and Specificity.
+
+**June 8th**: Bagging, random forest, svm, neural nets. Applied nnet on Mnist data set. Preprocessing techniques: remove zero variance and high correlated features.
+
+```{r, include=TRUE, eval=FALSE}
+# Remove zero variance
+mnist.nzv <- nearZeroVar(mnist, saveMetrics = TRUE)
+mnist <- mnist[, !mnist.nzv$nzv]
+
+# Remove high correlation
+mnist.correlated <- findCorrelation(cor(mnist), cutoff = 0.65, verbose = TRUE, exact = TRUE)
+mnist <- mnist[, -mnist.correlated]
+
+# Data partition (better than random sample method)
+index <- createDataPartition(y = mnist$label, p = 0.8)[[1]]
+mnist.train <- mnist[index,]
+mnist.test  <- mnist[-index,]
+```
+
+**June 10th**: Robben Island.
+
+```{r, echo=FALSE, out.width = "400px"}
+knitr::include_graphics("/img/robisland.jpg")
+```
+
+**June 11th**: String manipulation in R and intro to text mining + reg expressions.
+
+**June 12th**: Intro to creating Rmd files and publishing on Rpubs.
+
+**June 13th**: Made flexdashboard and shiny app for `Titanic` and `iris` datasets.
+
+**June 17th**: Switch to Python. Pipeline, feature selection, cross-validation, and hyper-parameter tuning in Jupyter Notebook. 
+
+**June 20th**: Learned about using AWS EC2 spot instances to cheaply train large models.
+
+**June 23rd**: Moved to Mouille Point.
+
+```{r, echo=FALSE, out.width = "400px"}
+knitr::include_graphics("/img/mouille.jpg")
+```
+
+**June 25th - July 6th**: Developed a RESTful API using Flask that performs the storage and transfer of daily trained models to AWS S3 buckets with associated metadata.
+
+**June 30th**: Kirstenbosch Botanical Garden
+
+```{r, echo=FALSE, out.width = "400px"}
+knitr::include_graphics("/img/garden1.jpg")
+```
+
+**July 7th**: Table Mountain hike from Skeleton Gorge (~ 4.5hrs).
+
+```{r, echo=FALSE, out.width = "400px"}
+knitr::include_graphics("/img/table1.jpg")
+knitr::include_graphics("/img/table2.jpg")
+```
+
+**July 8th - July 20th**: Learned about React and D3.js to create interactive data visualization graphs for OMNI client dashboard.
+
+**July 12 - 14**: Safari Trip!
+
+```{r, echo=FALSE, out.width = "400px"}
+knitr::include_graphics("/img/safari1.jpg")
+knitr::include_graphics("/img/safari2.jpg")
+knitr::include_graphics("/img/safari3.jpg")
+
+```
+
+Cango Caves
+
+```{r, echo=FALSE, out.width = "400px"}
+knitr::include_graphics("/img/safari4.jpg")
+```
+
+Serval
+
+```{r, echo=FALSE, out.width = "400px"}
+knitr::include_graphics("/img/safari5.jpg")
+```
+
+**July 20th**: Last day of work
+
+```{r, echo=FALSE, out.width = "400px"}
+knitr::include_graphics("/img/dp.jpg")
+```
+
+**July 21st**: Last day in Cape Town. Aaron, Yugaant, and I decided to go up Table mountain again.
+
+```{r, echo=FALSE, out.width = "400px"}
+knitr::include_graphics("/img/table3.jpg")
+knitr::include_graphics("/img/table4.jpg")
+```
+
+On the way, we saw these cute fellas chlling on a rock. These guys are called Rock Hyraxs.
+
+```{r, echo=FALSE, out.width = "400px"}
+knitr::include_graphics("/img/table5.jpg")
+```
