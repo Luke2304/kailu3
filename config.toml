@@ -1,7 +1,7 @@
 languageCode = "en-us"
 title = "Kai Lu"
 theme = "wookie"
-baseurl = "https://kailu3.netlify.com/"
+baseurl = "https://kailu3.com/"
 
 # googleAnalytics = ""
 
@@ -35,6 +35,7 @@ tags = "tags"
 
 [[menu.main]]
 weight = 1
+identifier = "home"
 name = "Home"
 url = "/"
 
