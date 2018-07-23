@@ -23,7 +23,7 @@ author = "Kai Lu"
 # twitterSite = "@invalid_input"
 
 [permalinks]
-blog  = "/blog/:year/:month/:slug/"
+blog  = "/:year/:month/:slug/"
 
 [sitemap]
 changefreq = "monthly"
@@ -35,14 +35,13 @@ tags = "tags"
 
 [[menu.main]]
 weight = 1
-identifier = "home"
-name = "Home"
+name = "Blog"
 url = "/"
 
 [[menu.main]]
 weight = 2
-name = "Blog"
-url = "/blog/"
+name = "About"
+url = "/about"
 
 # [[menu.main]]
 # weight = 3
