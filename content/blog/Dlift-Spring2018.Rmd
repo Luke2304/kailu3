@@ -162,6 +162,8 @@ dmgByPlayer <- ggplot(data = dmgtochampsSlice, aes(dmgtochampsSlice$player, dmgt
 
 dmgByPlayer + geom_col(fill = "#FF6666") + labs(x = "Player") + labs(y = "Average Damage dealt to Champions") + ggtitle("Average Total Damage Dealt to Champions") + theme(plot.title = element_text(hjust = 0.5)) + theme(axis.text.x = element_text(colour = "black",size = 7, angle = 0,hjust =.5,vjust = .5,face ="plain"))
 ```
+
+
 *Doublelift* ranks 9th out of 10 ADCs for Average Total Damage dealt to Champions.  
 
 
@@ -174,6 +176,8 @@ dmgByPlayerPerMin + geom_col(fill = "#FF6666") + labs(x = "Player") + labs(y = "
 
 
 ```
+
+
 Despite being 9th in average Total Damage, *Doublelift* ranks 4th for average Damage to Champions per Minute.
 
 
