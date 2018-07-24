@@ -53,8 +53,6 @@ MUCH BETTER!
 
 The type of the data from Riot's API is a Dictionary, which makes Python a perfect candidate to practice data wrangling. I picked up Python two weeks ago and I've found it to be an amazing language to work with data.
 
-I won't be going in detail of how I dealt with reformatting the data. This project will be in my [Github repo](https://github.com/Luke2304/Riot-API-scraper).
-
 One problem I ran into when reformatting the data into CSV format is that the column orders are alphabetical, which in my opinion makes working with the data more frustrating in the future. I learned that I could print out all the columns and reformat them as I liked:
 
 ```{python}
