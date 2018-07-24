@@ -46,7 +46,7 @@ dmgPerChamp$champion <- factor(dmgPerChamp$champion, levels = dmgPerChamp$champi
 
 ## Description
 
-Hello! This is a simple analysis of Doublelift's performance during the 2018 NALCS Spring Season. Doublelift is the ingame name of a League of Legends player who plays ADC position for Team Liquid. The dataset used this analysis is taken from and credited to https://oracleselixir.com/match-data/.
+This is a simple analysis of Doublelift's performance during the 2018 NALCS Spring Season. Doublelift is the ingame name of a League of Legends player who plays ADC position for Team Liquid. The dataset used this analysis is taken from and credited to https://oracleselixir.com/match-data/.
 
 For those we do not play League of Legends, here is a quick description:
 

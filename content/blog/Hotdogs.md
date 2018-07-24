@@ -11,7 +11,7 @@ tags:
 - Hotdog
 - Not Hotdog
 ---
-I was inspired by Silicon Valley's Jian Yang to make a Hotdog classifier in R with very little data (even though Python is way faster).
+I was inspired by Silicon Valley's Jian Yang to make a Hotdog classifier in R with very little data.
 
  
 ## Demonstration of the classifier we are looking to make:

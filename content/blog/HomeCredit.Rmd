@@ -12,7 +12,7 @@ library(purrr)
 library(caret)
 library(readr)
 ```
-In this post, we will walk through using R for the Home Credit Default Risk Kaggle Competition. This is my first Kaggle competition and I have learned lots in the process so far. 
+In this post, we will walk through fitting an xgbTree model for the Home Credit Default Risk Competition. This is my first Kaggle competition and I have learned lots in the process so far. 
 
 ## The Problem
 
@@ -81,7 +81,7 @@ ncol(trainingData)
 
 ## Training the Model
 
-Now that the preprocessing is complete, we can train our model using the *caret* package.
+Now that the preprocessing is complete, we can train our model using the *caret* package. 
 
 ```{r include=FALSE}
 trControl <- trainControl(method = "cv", n = 5, classProbs = TRUE, summaryFunction = twoClassSummary,
