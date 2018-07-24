@@ -9,7 +9,7 @@ categories:
 tags:
 - Other
 ---
-Two months ago, I landed in the beautiful city of Cape Town. I was tired, not from just the 12 hr plane ride but also from a frustrating semester of classes where I felt like I hadn't learned anything particularly useful. Looking back at my brief yet amazing eight weeks here, I can't believe how much I've learned here. The whole experience still feels surreal to me as I sit typing away in a cramped plane ride to London.
+Two months ago, I landed in the beautiful city of Cape Town. 
 
 I wanted to use this blog post as refresher for what I got to do this past eight-weeks:
 
@@ -52,7 +52,7 @@ knitr::include_graphics("/img/capepoint3.jpg")
 
 **June 6th**: Applied kNN and linear regression to `mtcars` dataset.
 
-**June 7th**: Learned about cross-validation, bootstrap, and the `caret` library using the `Titanic` dataset. Remember that when there is an imbalance of classes (0.91 / 0/09 for HomeCredit), undersampling the majority to match the minority is a bad idea. Upsampling the minority helps, but there is always tradeoff with Sensitivy and Specificity.
+**June 7th**: Learned about cross-validation, bootstrap, and the `caret` library using the `Titanic` dataset. Remember that when there is an imbalance of classes (0.91 / 0.09 for HomeCredit), undersampling the majority to match the minority is a bad idea. Upsampling the minority helps, but there is always tradeoff with Sensitivity and Specificity.
 
 **June 8th**: Bagging, random forest, svm, neural nets. Applied nnet on Mnist data set. Preprocessing techniques: remove zero variance and high correlated features.
 
@@ -85,7 +85,7 @@ knitr::include_graphics("/img/robisland.jpg")
 
 **June 17th**: Switch to Python. Pipeline, feature selection, cross-validation, and hyper-parameter tuning in Jupyter Notebook. 
 
-**June 20th**: Learned about using AWS EC2 spot instances to cheaply train large models.
+**June 20th**: Learned about using AWS EC2 spot instances to quickly train large models.
 
 **June 23rd**: Moved to Mouille Point.
 
@@ -93,7 +93,7 @@ knitr::include_graphics("/img/robisland.jpg")
 knitr::include_graphics("/img/mouille.jpg")
 ```
 
-**June 25th - July 6th**: Developed a RESTful API using Flask that performs the storage and transfer of daily trained models to AWS S3 buckets with associated metadata.
+**June 25th - July 6th**: Started working on a RESTful API using Flask that performs the storage and transfer of daily trained models to AWS S3 buckets with associated metadata.
 
 **June 30th**: Kirstenbosch Botanical Garden
 
@@ -147,7 +147,7 @@ knitr::include_graphics("/img/dp.jpg")
  
  <br /> 
  <br /> 
-**July 21st**: Last day in Cape Town. Aaron, Yugaant, and I decided to go up Table mountain again.
+**July 21st**: Last day in Cape Town. We decided to go up Table mountain again.
 
 ```{r, echo=FALSE, out.width = "800px"}
 knitr::include_graphics("/img/table3.jpg")
@@ -161,5 +161,3 @@ On the way, we saw these cute fellas chlling on a rock. These guys are called Ro
 ```{r, echo=FALSE, out.width = "800px"}
 knitr::include_graphics("/img/table5.jpg")
 ```
-
-I'll miss this place.
