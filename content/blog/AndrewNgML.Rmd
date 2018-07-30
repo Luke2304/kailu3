@@ -1,0 +1,25 @@
+---
+title: "Plan for August & Thoughts on Andrew Ng's ML course"
+author: "Kai Lu"
+date: '2018-07-29'
+categories: ["Machine Learning"]
+tags: ["Machine Learning"]
+---
+
+Lately I've been working through Wes McKinney's [Python for Data Analysis](https://www.amazon.ca/Python-Data-Analysis-Wrangling-IPython/dp/1449319793) book to get more comfortable with the more basic libraries (e.g. `numpy`, `pandas`, `matplotlib`). I've found it to be an excellent resource so far to get quicker at doing data wrangling in Python. I'm not sure if it's fair to compare doing data wrangling between R and Python just yet since most of my experience is still in R. For me, wrangling data in R still seems cleaner thanks to the ` %>% ` operator, but we'll see about that in the future as I become more proficient with Python. However, Python still is the go to when training models since R is just way too slow.
+
+Since it's not really possible to learn a language without actually using it somewhere, I've recently picked up [Andrew Ng's Machine Learning course](https://www.coursera.org/learn/machine-learning) to do the programming homeworks in Python (not really a big fan of Octave/Matlab). My first thoughts on the course are that is a great class for beginners to this area. Andrew Ng is amazing at explaining the concepts clearly and concisely. The best part for me is that he lets us know the mathematical intuition behind the algorithms and the programming assignments guide you to build them from scratch. For instance, in the first programming assignment you get to build a linear regression model from scratch using gradient descent which teaches you so much more about what exactly you're doing than the following code below:
+
+```{python eval=FALSE}
+from sklearn import linear_model
+model = linear_model.LinearRegression()
+model.fit(X, y)
+```
+
+While in practice it's way more efficient to just import libraries in than let's say coding up a randomforest from scratch (Yikes), I still want to appreciate the mathematical intuition behind my model. 
+
+Hopefully I'll be able to finish the course pretty soon to make more progress on my Riot Match Scrapper before school starts. 
+
+
+
+
