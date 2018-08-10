@@ -18,7 +18,7 @@ model.fit(X, y)
 
 While in practice it's way more efficient to just import libraries in than let's say coding up a randomforest from scratch (Yikes), I still want to appreciate the mathematical intuition behind my model. 
 
-Hopefully I'll be able to finish the course pretty soon to make more progress on my Riot Match Scrapper before school starts. 
+Hopefully I'll be able to finish the course pretty soon to make more progress on my Riot Match Scraper before school starts. 
 
 
 
